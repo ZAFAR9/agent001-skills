@@ -1,0 +1,20 @@
+component,purpose,key_props,example,gotchas
+motion.div,Animatable div — the workhorse,initial animate exit transition whileHover whileTap whileInView layout layoutId drag,"<motion.div initial={{opacity:0}} animate={{opacity:1}}>",Use for 90% of animations — most HTML elements have a motion equivalent
+motion.span,Inline text animation,Same as motion.div,"<motion.span animate={{color:'#ff0000'}}>",Great for animating individual words or characters
+motion.img,Animatable image,Same + src alt,"<motion.img whileHover={{scale:1.05}}>",Use layoutId for shared image transitions between list and detail
+motion.button,Animatable button — preferred over div,Same as motion.div,"<motion.button whileTap={{scale:0.96}} whileHover={{scale:1.02}}>",Preserves button semantics and keyboard accessibility
+motion.ul / motion.li,Stagger list animations,variants staggerChildren,"<motion.ul variants={container}><motion.li variants={item}/>",Parent ul controls stagger — children just need matching variant keys
+motion.path,SVG path animation — draw-on effect,pathLength pathOffset strokeDasharray,"<motion.path initial={{pathLength:0}} animate={{pathLength:1}} transition={{duration:1}}/>",pathLength goes 0→1 — no need to calculate stroke-dashoffset manually
+AnimatePresence,Enables exit animations — required for conditional renders,mode initial,"{show && <motion.div exit={{opacity:0}}/>}","mode='wait' sequences — mode='popLayout' for list removals. mode='sync' is default"
+AnimatePresence mode wait,Wait for exit before entering next element,mode='wait',"<AnimatePresence mode='wait'><motion.div key={page}/>","Only one child at a time — key prop tells FM which component changed"
+AnimatePresence mode popLayout,Shrinks outgoing item before removing,mode='popLayout',"Use for list item removal — smoother than default",Requires layout prop on motion children
+useAnimation,Imperative animation control — trigger from code,controls.start controls.stop,"const c=useAnimation(); c.start({opacity:1}); <motion.div animate={c}/>",Use when animation depends on external events not component state
+useScroll,Track scroll position of page or element,scrollY scrollYProgress scrollX,"const {scrollYProgress}=useScroll({target:ref})",target:ref for element scroll — omit for page scroll
+useTransform,Map one motion value to another,input range output range,"const opacity=useTransform(scrollYProgress,[0,0.5],[0,1])",Input and output arrays must be same length — supports non-linear mapping
+useSpring,Add spring physics to any motion value,stiffness damping mass,"const smooth=useSpring(rawValue{stiffness:100{damping:20})",Wrap useTransform output in useSpring for smooth scroll-driven parallax
+useInView,Detect when element enters viewport,once amount margin,"const isInView=useInView(ref{once:true{amount:0.3})",Once:true means fires once — omit for repeat trigger on each scroll
+useMotionValue,Create a motion value without React state,get set,"const x=useMotionValue(0); animate(x{500{{duration:0.8})",Doesn't trigger re-renders — key for performance-sensitive animations
+useReducedMotion,Detect user's reduced motion preference,—,"const reduced=useReducedMotion(); if(reduced) return simpleVariants",Always implement for accessibility — WCAG 2.3.3 compliance
+LayoutGroup,Coordinate layout animations across components,id,"<LayoutGroup id='tabs'><Tab/><Tab/></LayoutGroup>",Required when layoutId elements are in sibling components
+Reorder.Group,Drag-to-reorder list,axis values onReorder,"<Reorder.Group axis='y' values={items} onReorder={setItems}>",Built-in drag reorder — no custom drag logic needed
+Reorder.Item,Individual reorderable item,value,"<Reorder.Item value={item}>",Value must match the item in the values array

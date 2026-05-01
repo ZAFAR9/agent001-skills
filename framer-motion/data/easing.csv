@@ -1,0 +1,12 @@
+name,curve,feel,best_for,avoid_for
+easeOut,[0.0,0.0,0.2,1.0],Starts fast ends gentle,Entrances — element flying in,Exits (feels cut off)
+easeIn,[0.4,0.0,1.0,1.0],Starts slow builds speed,Exits — element leaving screen,Entrances (feels laggy)
+easeInOut,[0.4,0.0,0.2,1.0],Slow start slow end,State transitions that start and end,Quick microinteractions
+linear,[0,0,1,1],Constant speed robotic,Loading bars progress indicators,Any organic animation
+Sharp,[0.4,0.0,0.6,1.0],Fast decisive,Quick utility actions system feedback,Premium or organic UX
+Premium Ease,[0.22,1,0.36,1],Explosive start ultra-soft landing,Hero entrances feature reveals,Subtle utility animations
+Anticipate,[0.38,0,0.6,1.2],Slight pull-back then spring forward,Buttons that feel physical,Modals (too dramatic)
+Overshoot Spring,type:spring stiffness:300 damping:10,Goes past target bounces back,Playful icons game UI fun apps,Enterprise professional apps
+Snappy Spring,type:spring stiffness:500 damping:30,Instant response no lag,Interactive controls toggles,Large element moves
+Gentle Spring,type:spring stiffness:80 damping:15,Floats to position softly,Tooltips floating elements,Buttons (too slow)
+Elastic,[0.68,-0.6,0.32,1.6],Exaggerated spring overshoot,Playful delight moments,Any serious product UI
